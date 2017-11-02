@@ -2,7 +2,7 @@
 
 namespace Softcomtecnologia\Api\Provider;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use Softcomtecnologia\Api\Token\SoftcomAccessToken;
