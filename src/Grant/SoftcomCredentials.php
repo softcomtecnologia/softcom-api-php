@@ -4,6 +4,7 @@ namespace Softcomtecnologia\Api\Grant;
 
 use League\OAuth2\Client\Grant\GrantInterface;
 use Softcomtecnologia\Api\Token\SoftcomAccessToken;
+use Softcomtecnologia\Api\Exceptions\InvalidResponseException;
 
 class SoftcomCredentials implements GrantInterface
 {
@@ -21,9 +22,14 @@ class SoftcomCredentials implements GrantInterface
      * @param array $response
      *
      * @return SoftcomAccessToken
+     * @throws InvalidResponseException
      */
     public function handleResponse($response = [])
     {
+        if (isset($response['code']) && $response['code'] != 1) {
+            throw new InvalidResponseException($response);
+        }
+
         return new SoftcomAccessToken($response);
     }
 

@@ -7,9 +7,9 @@ use League\OAuth2\Client\Token\AccessToken;
 class SoftcomAccessToken extends AccessToken
 {
     /**
-     * @var string|null
+     * @var string
      */
-    public $type;
+    public $type = 'Bearer';
 
     /**
      * @var string|null
