@@ -73,7 +73,7 @@ class SoftcomProvider extends AbstractProvider
      * @param       $url
      * @param array $params
      *
-     * @return \GuzzleHttp\Stream\StreamInterface|null
+     * @return \GuzzleHttp\Stream\Stream|null
      */
     public function post($token, $url, array $params = [])
     {
