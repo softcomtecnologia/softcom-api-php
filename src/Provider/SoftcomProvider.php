@@ -64,7 +64,7 @@ class SoftcomProvider extends AbstractProvider
      */
     public function userDetails($response, AccessToken $token)
     {
-        throw new \Exception('Method not yet implemented');
+        throw new \Exception('Method not implemented yet');
     }
 
 
