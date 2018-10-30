@@ -64,7 +64,7 @@ class SoftcomProvider extends AbstractProvider
      */
     public function userDetails($response, AccessToken $token)
     {
-        throw new \Exception('Method not implemented yet');
+        throw new \Exception('Method not yet implemented');
     }
 
 
@@ -80,7 +80,7 @@ class SoftcomProvider extends AbstractProvider
         $client = $this->client($token);
         $request = $client->post(
             $this->urlResource($url),
-            $params ? ['body' => $params] : []
+            $this->mergeParams(['body' => $params])
         );
 
         return $request->getBody();
@@ -96,13 +96,33 @@ class SoftcomProvider extends AbstractProvider
      */
     public function get($token, $url, array $params = [])
     {
-        $client = $this->client($token);
+        $client  = $this->client($token);
         $request = $client->get(
             $this->urlResource($url),
-            ['query' => $params]
+            $this->mergeParams(['query' => $params], $token)
         );
 
         return $request->getBody();
+    }
+
+
+    /**
+     * @param $params
+     * @param $token
+     * @return array
+     */
+    protected function mergeParams($params, $token)
+    {
+        if (!$params) {$params = [];}
+
+        $headers = [
+            'Authorization' => ["{$token->type} {$token->accessToken}"],
+            'Accept'        => 'application/json',
+        ];
+
+        $params['headers'] = $headers;
+
+        return $params;
     }
 
 
@@ -116,10 +136,6 @@ class SoftcomProvider extends AbstractProvider
     {
         $token = $this->token($token);
         $client = new Client();
-        $client->setDefaultOption(
-            'headers',
-            ['Authorization' => ["{$token->type} {$token->accessToken}"]]
-        );
 
         return $client;
     }
