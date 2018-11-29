@@ -80,7 +80,7 @@ class SoftcomProvider extends AbstractProvider
         $client = $this->client($token);
         $request = $client->post(
             $this->urlResource($url),
-            $this->mergeParams(['body' => $params])
+            $this->mergeParams(['form_params' => $params], $token)
         );
 
         return $request->getBody();
