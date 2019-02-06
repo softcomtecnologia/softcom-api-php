@@ -86,6 +86,23 @@ class SoftcomProvider extends AbstractProvider
         return $request->getBody();
     }
 
+    /**
+     * @param $token
+     * @param $url
+     * @param array $params
+     * @return mixed
+     * @throws \Exception
+     */
+    public function put($token, $url, array $params = [])
+    {
+        $client = $this->client($token);
+        $request = $client->put(
+            $this->urlResource($url),
+            $this->mergeParams(['form_params' => $params], $token)
+        );
+        return $request->getBody();
+    }
+
 
     /**
      * @param       $token
