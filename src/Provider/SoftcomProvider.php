@@ -25,6 +25,24 @@ class SoftcomProvider extends AbstractProvider
      */
     public $domain = 'http://softcomtecnologia/softauth';
 
+    protected $clientOptions = [];
+
+
+    /**
+     * @return array
+     */
+    public function getClientOptions()
+    {
+        return $this->getClientOptions();
+    }
+
+    /**
+     * @param $clientOptions
+     */
+    public function setClientOptions(array $clientOptions)
+    {
+        $this->clientOptions = $clientOptions;
+    }
 
     /**
      * @return string
@@ -152,7 +170,9 @@ class SoftcomProvider extends AbstractProvider
     protected function client($token)
     {
         $token = $this->token($token);
-        $client = new Client();
+        $clientOptions = [];
+
+        $client = new Client($this->clientOptions);
 
         return $client;
     }
